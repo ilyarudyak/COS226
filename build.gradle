@@ -6,7 +6,7 @@ apply plugin: 'application'
 
 sourceCompatibility = 1.8
 
-mainClassName = "pa1_wordnet.Demo"
+mainClassName = "demo.Demo"
 
 repositories {
     mavenCentral()
