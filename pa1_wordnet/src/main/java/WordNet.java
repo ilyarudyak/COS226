@@ -14,7 +14,7 @@ import java.util.Map;
 public class WordNet {
 
     // symbol table with key=noun and value=synset_id
-    private Map<String, Integer> nounsMap;
+    private Map<String, List<Integer>> nounsMap;
 
     // we can get a synset (as a string) by id like that: synsetsList.get(id);
     private List<String> synsetsList;
@@ -35,7 +35,7 @@ public class WordNet {
 
         wordNetDigraph = new Digraph(V);
         readHypernyms(hypernymsFileName);
-        if (hasCycle(wordNetDigraph)) {
+        if (hasCycle(wordNetDigraph) || hasMultipleRoots(wordNetDigraph)) {
             throw new IllegalArgumentException();
         }
 
@@ -43,9 +43,18 @@ public class WordNet {
     }
 
     // helper functions
-    private boolean hasCycle( Digraph G) {
+    private boolean hasCycle(Digraph G) {
         DirectedCycle dc = new DirectedCycle(G);
         return dc.hasCycle();
+    }
+    private boolean hasMultipleRoots(Digraph G) {
+        int multipleRootsCount = 0;
+        for (int i = 0; i < G.V(); i++) {
+            if (G.outdegree(i) == 0) {
+                multipleRootsCount++;
+            }
+        }
+        return multipleRootsCount > 1;
     }
     private void readHypernyms(String hypernymsFileName) {
 
@@ -76,7 +85,16 @@ public class WordNet {
             // as a key with synset id as a pair
             String[] words = splitLine[1].split(" ");
             for (String word: words) {
-                nounsMap.put(word, synsetId);
+                if (nounsMap.containsKey(word)) {
+                    List<Integer> synsetsIdList = nounsMap.get(word);
+                    synsetsIdList.add(synsetId);
+                    nounsMap.put(word, synsetsIdList);
+                } else {
+                    List<Integer> synsetsIdList = new ArrayList<>();
+                    synsetsIdList.add(synsetId);
+                    nounsMap.put(word, synsetsIdList);
+                }
+
             }
         }
         return V;
@@ -89,30 +107,44 @@ public class WordNet {
 
     // is the word a WordNet noun?
     public boolean isNoun(String word) {
+
+        if (word == null) {
+            throw new NullPointerException();
+        }
+
         return nounsMap.containsKey(word);
     }
 
     // distance between nounA and nounB (defined below)
     public int distance(String nounA, String nounB) {
 
+        if (nounA == null || nounB == null) {
+            throw new NullPointerException();
+        }
+
         if (!isNoun(nounA) || !isNoun(nounB)) {
             throw new IllegalArgumentException();
         }
 
-        int nounASynsetId = nounsMap.get(nounA);
-        int nounBSynsetId = nounsMap.get(nounB);
-        return sap.length(nounASynsetId, nounBSynsetId);
+        List<Integer> nounASynsetIdList = nounsMap.get(nounA);
+        List<Integer> nounBSynsetIdList = nounsMap.get(nounB);
+        return sap.length(nounASynsetIdList, nounBSynsetIdList);
     }
 
     // a synset (second field of synsetsList.txt) that is the common ancestor of nounA and nounB
     // in a shortest ancestral path (defined below)
     public String sap(String nounA, String nounB) {
+
+        if (nounA == null || nounB == null) {
+            throw new NullPointerException();
+        }
+
         if (!isNoun(nounA) || !isNoun(nounB)) {
             throw new IllegalArgumentException();
         }
-        int nounASynsetId = nounsMap.get(nounA);
-        int nounBSynsetId = nounsMap.get(nounB);
-        int ancestorId = sap.ancestor(nounASynsetId, nounBSynsetId);
+        List<Integer> nounASynsetIdList = nounsMap.get(nounA);
+        List<Integer> nounBSynsetIdList = nounsMap.get(nounB);
+        int ancestorId = sap.ancestor(nounASynsetIdList, nounBSynsetIdList);
         return synsetsList.get(ancestorId);
     }
 
@@ -120,13 +152,13 @@ public class WordNet {
     public static void main(String[] args) {
 
         String synsetsFileName = "src/main/resources/synsets15.txt";
-        String hypernymsFileName = "src/main/resources/hypernyms15Tree.txt";
+        String hypernymsFileName = "src/main/resources/hypernyms3InvalidTwoRoots.txt";
         WordNet wn = new WordNet(synsetsFileName, hypernymsFileName);
 
 //        StdOut.print(wn.wordNetDigraph);
-        StdOut.println(wn.distance("h", "m"));
-        StdOut.println(wn.sap("h", "m"));
-        StdOut.println(wn.isNoun("x"));
+//        StdOut.println(wn.distance("h", "m"));
+//        StdOut.println(wn.sap("h", "m"));
+//        StdOut.println(wn.isNoun("x"));
 
     }
 }

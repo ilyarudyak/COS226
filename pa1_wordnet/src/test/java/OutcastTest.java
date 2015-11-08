@@ -22,7 +22,7 @@ public class OutcastTest {
 
     @Test
     public void testOutcast() throws Exception {
-        In in = new In("src/main/resources/outcast8.txt");
+        In in = new In("src/main/resources/outcast11.txt");
         String[] nouns = in.readAllStrings();
         StdOut.println(outcast.outcast(nouns));
     }
