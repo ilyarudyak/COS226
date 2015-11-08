@@ -35,7 +35,7 @@ public class WordNet {
 
         wordNetDigraph = new Digraph(V);
         readHypernyms(hypernymsFileName);
-        if (!isDAG(wordNetDigraph)) {
+        if (hasCycle(wordNetDigraph)) {
             throw new IllegalArgumentException();
         }
 
@@ -43,9 +43,9 @@ public class WordNet {
     }
 
     // helper functions
-    private boolean isDAG( Digraph G) {
+    private boolean hasCycle( Digraph G) {
         DirectedCycle dc = new DirectedCycle(G);
-        return !dc.hasCycle();
+        return dc.hasCycle();
     }
     private void readHypernyms(String hypernymsFileName) {
 
@@ -94,9 +94,11 @@ public class WordNet {
 
     // distance between nounA and nounB (defined below)
     public int distance(String nounA, String nounB) {
+
         if (!isNoun(nounA) || !isNoun(nounB)) {
             throw new IllegalArgumentException();
         }
+
         int nounASynsetId = nounsMap.get(nounA);
         int nounBSynsetId = nounsMap.get(nounB);
         return sap.length(nounASynsetId, nounBSynsetId);
