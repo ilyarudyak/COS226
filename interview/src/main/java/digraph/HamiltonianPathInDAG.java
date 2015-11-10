@@ -52,14 +52,10 @@ public class HamiltonianPathInDAG {
     }
 
     public static void main(String[] args) {
-
         Digraph DAG = DigraphGenerator.dag(5, 9);
         StdOut.println(DAG);
         StdOut.println(new Topological(DAG).order());
         HamiltonianPathInDAG hp = new HamiltonianPathInDAG(DAG);
         StdOut.println(hp.hasPath());
     }
-
-
-
 }
