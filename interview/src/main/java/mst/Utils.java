@@ -20,4 +20,25 @@ public class Utils {
         }
         return G;
     }
+
+    // multiply all weights by -1
+    public static EdgeWeightedGraph buildNegativeGraph(EdgeWeightedGraph G) {
+        EdgeWeightedGraph GN = new EdgeWeightedGraph(G.V());
+        for (Edge e: G.edges()) {
+            int v = e.either();
+            int w = e.other(v);
+            Edge en = new Edge(v, w, e.weight() * -1);
+            GN.addEdge(en);
+        }
+        return GN;
+    }
+
+    public static double getTotalWeight(EdgeWeightedGraph G) {
+        double w = 0;
+        for (Edge e: G.edges()) {
+            w += e.weight();
+        }
+        return w;
+    }
+
 }
