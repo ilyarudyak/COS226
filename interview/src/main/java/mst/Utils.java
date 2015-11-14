@@ -41,4 +41,14 @@ public class Utils {
         return w;
     }
 
+    public static double maxEdgeInMST(Iterable<Edge> edges) {
+        double max = 0;
+        for (Edge e : edges) {
+            if (e.weight() > max) {
+                max = e.weight();
+            }
+        }
+        return max;
+    }
+
 }
