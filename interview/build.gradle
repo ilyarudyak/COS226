@@ -5,7 +5,7 @@ apply plugin: 'application'
 
 sourceCompatibility = 1.8
 
-mainClassName = "graph.EulerTour"
+mainClassName = "graph.NonRecursiveDFS"
 
 repositories {
     mavenCentral()
