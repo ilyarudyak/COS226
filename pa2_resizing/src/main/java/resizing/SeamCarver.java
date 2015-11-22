@@ -2,6 +2,8 @@ package resizing;
 
 import edu.princeton.cs.algs4.Picture;
 
+import java.awt.*;
+
 /**
  * This is pa2 seam carver from cos226 Princeton, part 2.
  * Seam-carving is a content-aware image resizing technique invented by
@@ -10,47 +12,57 @@ import edu.princeton.cs.algs4.Picture;
  */
 public class SeamCarver {
 
+    private Picture picture;
+
     // create a seam carver object based on the given picture
     public SeamCarver(Picture picture) {
-
+        this.picture = new Picture(picture);
     }
 
-    // current picture
+    // getters
     public Picture picture() {
-        return null;
+        return picture;
     }
-
-    // width of current picture
     public int width() {
-        return 0;
+        return picture.width();
     }
-
-    // height of current picture
     public int height() {
-        return 0;
+        return picture.height();
     }
 
-    // energy of pixel at column x and row y
+    // ---------------------------------------------
+
+    // (1) energy of pixel at column x and row y
     public double energy(int x, int y) {
         return 0;
     }
 
-    // sequence of indices for horizontal seam
+    // helper methods
+    private int dualGradient(int x, int y) {
+        Color colorLeft = picture.get(x - 1, y);
+        return 0;
+    }
+
+    // ---------------------------------------------
+
+    // (2a) sequence of indices for horizontal seam
     public int[] findHorizontalSeam() {
         return null;
     }
 
-    // sequence of indices for vertical seam
+    // (2b) sequence of indices for vertical seam
     public int[] findVerticalSeam() {
         return null;
     }
 
-    // remove horizontal seam from current picture
+    // ---------------------------------------------
+
+    // (3a) remove horizontal seam from current picture
     public void removeHorizontalSeam(int[] seam) {
 
     }
 
-    // remove vertical seam from current picture
+    // (3b) remove vertical seam from current picture
     public void removeVerticalSeam(int[] seam) {
 
     }

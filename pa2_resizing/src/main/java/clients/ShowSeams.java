@@ -8,9 +8,11 @@
  *  Each image hides the previous one - drag them to see all three.
  *
  ******************************************************************************/
+package clients;
 
 import edu.princeton.cs.algs4.Picture;
 import edu.princeton.cs.algs4.StdOut;
+import resizing.SeamCarver;
 
 public class ShowSeams {
 
