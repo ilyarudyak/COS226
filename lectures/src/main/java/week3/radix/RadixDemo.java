@@ -13,9 +13,40 @@ public class RadixDemo {
 
     public static void main(String[] args) {
 
-        String[] a = new In("src/main/resources/tinyLSD.txt").readAllStrings();
-        LSDCopy.sort(a, 4);
+//        String[] a = new In("src/main/resources/tinyLSD.txt").readAllStrings();
+//        LSDCopy.sort(a, 4);
+//        StdOut.println();
+//        StdOut.println(Arrays.toString(a));
+
+//        String[] a = new In("src/main/resources/tinyMSD.txt").readAllStrings();
+//        MSDCopy.sort(a);
+//        StdOut.println();
+//        StdOut.println(Arrays.toString(a));
+
+        String[] a = new In("src/main/resources/tiny3way.txt").readAllStrings();
+        Quick3StringCopy.sort(a);
         StdOut.println();
         StdOut.println(Arrays.toString(a));
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
