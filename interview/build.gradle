@@ -5,7 +5,7 @@ apply plugin: 'application'
 
 sourceCompatibility = 1.8
 
-mainClassName = "strings.radix.CyclicRotations"
+mainClassName = "strings.tries.PrefixFreeCodes"
 
 repositories {
     mavenCentral()
