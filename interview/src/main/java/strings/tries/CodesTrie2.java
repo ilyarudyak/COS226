@@ -4,7 +4,7 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdOut;
 
-public class CodesTrie {
+public class CodesTrie2 {
 
     private static final int R = 2;
     private static final int D = 48;
@@ -18,7 +18,7 @@ public class CodesTrie {
         private Node[] next = new Node[R];
     }
 
-    public CodesTrie(In in) {
+    public CodesTrie2(In in) {
 
         String[] a = in.readAllStrings();
         for (int i = 0; i < a.length; i++) {
@@ -75,7 +75,7 @@ public class CodesTrie {
     public static void main(String[] args) {
 
         In in = new In("src/main/resources/prefix1.txt");
-        CodesTrie trie = new CodesTrie(in);
+        CodesTrie2 trie = new CodesTrie2(in);
 
         for (String key : trie.keys()) {
             StdOut.println(key + " " + trie.get(key));

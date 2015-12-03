@@ -10,10 +10,10 @@ import java.util.Iterator;
  */
 public class PrefixFreeCodes2 {
 
-    private CodesTrie trie;
+    private CodesTrie2 trie;
 
     public PrefixFreeCodes2(In in) {
-        trie = new CodesTrie(in);
+        trie = new CodesTrie2(in);
     }
 
     public boolean check() {
