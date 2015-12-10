@@ -5,7 +5,7 @@ apply plugin: 'application'
 
 sourceCompatibility = 1.8
 
-mainClassName = "week5.tries.TriesDemo"
+mainClassName = "week3.radix.RadixCLRS"
 
 repositories {
     mavenCentral()
