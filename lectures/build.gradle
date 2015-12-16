@@ -5,7 +5,7 @@ apply plugin: 'application'
 
 sourceCompatibility = 1.8
 
-mainClassName = "week6.compression.GenomeDemo"
+mainClassName = "week6.compression.MyRunLength"
 
 repositories {
     mavenCentral()
