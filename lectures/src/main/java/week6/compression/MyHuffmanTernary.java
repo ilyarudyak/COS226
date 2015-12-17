@@ -36,8 +36,13 @@ public class MyHuffmanTernary {
             for (int j = 0; j < code.length(); j++) {
                 if (code.charAt(j) == '0') {
                     out.write(false);
+                    out.write(false);
                 } else if (code.charAt(j) == '1') {
+                    out.write(false);
                     out.write(true);
+                } else if (code.charAt(j) == '2') {
+                    out.write(true);
+                    out.write(false);
                 } else throw new IllegalStateException("Illegal state");
             }
         }
@@ -48,7 +53,8 @@ public class MyHuffmanTernary {
     private void buildCode(Node node, String s) {
         if (!node.isLeaf()) {
             buildCode(node.left,  s + '0');
-            buildCode(node.right, s + '1');
+            buildCode(node.middle,  s + '1');
+            buildCode(node.right, s + '2');
         }
         else {
             codes[node.ch] = s;
@@ -56,25 +62,22 @@ public class MyHuffmanTernary {
     }
     private void buildTrie() {
 
-        // initialze priority queue with singleton trees
+        // initialize priority queue with singleton trees
         MinPQ<Node> pq = new MinPQ<>();
-        for (char i = 0; i < R; i++)
-            if (freq[i] > 0)
-                pq.insert(new Node(i, freq[i], null, null));
-
-        // special case in case there is only one character with a nonzero frequency
-        if (pq.size() == 1) {
-            if (freq['\0'] == 0) pq.insert(new Node('\0', 0, null, null));
-            else                 pq.insert(new Node('\1', 0, null, null));
-        }
+        for (char c = 0; c < R; c++)
+            if (freq[c] > 0)
+                pq.insert(new Node(c, freq[c], null, null, null));
 
         // merge two smallest trees
         while (pq.size() > 1) {
             Node left  = pq.delMin();
+            Node middle = pq.delMin();
             Node right = pq.delMin();
-            Node parent = new Node('\0', left.freq + right.freq, left, right);
+            // we use '\0' as a placeholder for all non-leaf nodes
+            Node parent = new Node('\0', left.freq + middle.freq + right.freq, left, middle, right);
             pq.insert(parent);
         }
+
         root = pq.delMin();
     }
     private void buildFreq() {
@@ -106,12 +109,35 @@ public class MyHuffmanTernary {
                 StdOut.print(node.ch);
                 node = root;
             } else {
-                if (!in.readBoolean()) {
+                int code = get2bits(in);
+                if (code == 0) {
                     node = node.left;
-                } else {
+                } else if (code == 1){
+                    node = node.middle;
+                } else if (code == 2) {
                     node = node.right;
+                } else {
+                    throw new IllegalArgumentException("wrong code");
                 }
             }
+        }
+    }
+
+    private int get2bits(BinaryIn in) {
+        if (!in.isEmpty()) {
+            boolean bit1 = in.readBoolean();
+            boolean bit2 = in.readBoolean();
+            if (bit1 == false && bit2 == false) {
+                return 0;
+            } else if (bit1 == false && bit2 == true) {
+                return 1;
+            } else if (bit1 == true && bit2 == false) {
+                return 2;
+            } else {
+                return -1;
+            }
+        } else {
+            return -1;
         }
     }
 
@@ -121,18 +147,19 @@ public class MyHuffmanTernary {
     private class Node implements Comparable<Node> {
         private final char ch;
         private final int freq;
-        private final Node left, right;
+        private final Node left, middle, right;
 
-        Node(char ch, int freq, Node left, Node right) {
+        Node(char ch, int freq, Node left, Node middle, Node right) {
             this.ch    = ch;
             this.freq  = freq;
             this.left  = left;
+            this.middle = middle;
             this.right = right;
         }
 
         // is the node a leaf node?
         private boolean isLeaf() {
-            return (left == null) && (right == null);
+            return (left == null) && (middle == null) && (right == null);
         }
 
         // compare, based on frequency
@@ -143,20 +170,16 @@ public class MyHuffmanTernary {
 
     public static void main(String[] args) {
 
-//        In in = new In("src/main/resources/abra.txt");
-//        BinaryOut out = new BinaryOut("src/main/resources/abra.huffman");
-//        MyHuffman h = new MyHuffman(in);
+        In in = new In("src/main/resources/abra3.txt");
+//        BinaryOut out = new BinaryOut("src/main/resources/abra3.huffman");
+        MyHuffmanTernary h = new MyHuffmanTernary(in);
 //        h.compress(out);
 
-//        BinaryIn in = new BinaryIn("src/main/resources/abra.huffman");
-//        MyBinaryDump bd = new MyBinaryDump();
-//        bd.dump(in);
 
-        In in = new In("src/main/resources/abra2.txt");
-        MyHuffmanTernary h = new MyHuffmanTernary(in);
-        h.showFreq();
-        h.showCodes();
-//        h.expand(new BinaryIn("src/main/resources/abra.huffman"));
+//        In in = new In("src/main/resources/abra3.txt");
+        BinaryIn in2 = new BinaryIn("src/main/resources/abra3.huffman");
+        h.expand(in2);
+
 
     }
 }
