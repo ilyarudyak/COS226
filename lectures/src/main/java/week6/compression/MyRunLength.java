@@ -11,6 +11,10 @@ public class MyRunLength {
     private static final int R    = 256;
     private static final int LG_R = 8;
 
+    public void compress(String s) {
+
+    }
+
     public void compress(BinaryIn in, BinaryOut out) {
         char run = 0;
         boolean old = false;
@@ -42,11 +46,15 @@ public class MyRunLength {
 //        MyRunLength rl = new MyRunLength();
 //        rl.compress(in, out);
 
-        BinaryIn in = new BinaryIn("src/main/resources/q32x48.bin");
-        MyPictureDump pd = new MyPictureDump(32, 48);
-        MyBinaryDump bd = new MyBinaryDump(32);
-        pd.dump(in);
+//        BinaryIn in = new BinaryIn("src/main/resources/q32x48.bin");
+//        MyPictureDump pd = new MyPictureDump(32, 48);
+//        MyBinaryDump bd = new MyBinaryDump(32);
+//        pd.dump(in);
 //        bd.dump(in);
+
+        MyRunLength rl = new MyRunLength();
+
+
     }
 }
 

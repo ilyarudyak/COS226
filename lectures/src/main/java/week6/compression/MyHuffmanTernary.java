@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.*;
 /**
  * Created by ilyarudyak on 12/16/15.
  */
-public class MyHuffman {
+public class MyHuffmanTernary {
 
     // alphabet size of extended ASCII
     private static final int R = 127;
@@ -16,7 +16,7 @@ public class MyHuffman {
     // codes['A'] = "001" etc.
     private String[] codes;
 
-    public MyHuffman(In in) {
+    public MyHuffmanTernary(In in) {
         text = in.readString();
         freq = new int[R];
         codes = new String[R];
@@ -153,7 +153,7 @@ public class MyHuffman {
 //        bd.dump(in);
 
         In in = new In("src/main/resources/abra2.txt");
-        MyHuffman h = new MyHuffman(in);
+        MyHuffmanTernary h = new MyHuffmanTernary(in);
         h.showFreq();
         h.showCodes();
 //        h.expand(new BinaryIn("src/main/resources/abra.huffman"));
