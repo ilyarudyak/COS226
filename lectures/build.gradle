@@ -5,7 +5,7 @@ apply plugin: 'application'
 
 sourceCompatibility = 1.8
 
-mainClassName = "week6.compression.MyHuffmanTernary"
+mainClassName = "week6.compression.SardinasPatterson"
 
 repositories {
     mavenCentral()
