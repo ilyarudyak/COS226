@@ -5,7 +5,6 @@ import edu.princeton.cs.algs4.BinaryStdOut;
 import edu.princeton.cs.algs4.StdOut;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,9 +28,6 @@ public class MoveToFront {
         // read the input
         String s = BinaryStdIn.readString();
         char[] input = s.toCharArray();
-
-        // print number of bytes in original uncompressed message
-        BinaryStdOut.write(input.length);
 
         //  for each symbol of the input sequence:
         //      output the index of the symbol in the symbol table
@@ -63,14 +59,12 @@ public class MoveToFront {
             A.add(i);
         }
 
-        // number of bytes to write
-        int length = BinaryStdIn.readInt();
 //        StdOut.printf("length=%d\n", length);
 
         // for each index of the input sequence:
         //      output the symbol at that index of the symbol table
         //      move that symbol to the front of the symbol table
-        for (int i = 0; i < length; i++) {
+        while(!BinaryStdIn.isEmpty()) {
             int index = BinaryStdIn.readInt(8);
             int ch = A.get(index);
 
