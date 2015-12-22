@@ -1,1 +1,4 @@
 java -cp ../../../libs/algs4.jar edu.princeton.cs.algs4.HexDump 16 < abra.txt
+java -cp build/classes/main:libs/algs4.jar burrows.MoveToFront - < src/main/resources/abra.txt
+java -cp build/classes/main:libs/algs4.jar burrows.MoveToFront - < src/main/resources/abra.txt | java -cp libs/algs4.jar edu.princeton.cs.algs4.HexDump 16
+java -cp build/classes/main:libs/algs4.jar burrows.MoveToFront - < src/main/resources/abra.txt | java -cp build/classes/main:libs/algs4.jar burrows.MoveToFront +
