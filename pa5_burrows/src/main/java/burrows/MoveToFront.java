@@ -71,12 +71,12 @@ public class MoveToFront {
 //            StdOut.printf("%2c:%2d index=%02d ", ch, ch, index);
 //            StdOut.println(A.toString().substring(0, 20) + " ...  ");
 
-            StdOut.print((char) ch);
+            BinaryStdOut.write(ch, 8);
             A.remove(index);
 //            StdOut.println(A.toString().substring(0, 20) + " ...");
             A.add(0, ch);
         }
-        StdOut.println();
+        BinaryStdOut.close();
     }
 
     // if args[0] is '-', apply move-to-front encoding
