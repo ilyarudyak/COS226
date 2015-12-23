@@ -8,3 +8,5 @@ java -cp build/classes/main:libs/algs4.jar burrows.MoveToFront + < src/main/reso
 
 java -cp build/classes/main:libs/algs4.jar burrows.BurrowsWheeler - < src/main/resources/abra.txt | java -cp libs/algs4.jar edu.princeton.cs.algs4.HexDump 16
 java -cp build/classes/main:libs/algs4.jar burrows.BurrowsWheeler - < src/main/resources/aesop.txt > src/main/resources/aesop2.txt.bwt
+java -cp build/classes/main:libs/algs4.jar burrows.BurrowsWheeler + < src/main/resources/abra.txt.bwt
+java -cp build/classes/main:libs/algs4.jar burrows.BurrowsWheeler + < src/main/resources/aesop.txt.bwt > src/main/resources/aesop3.txt
