@@ -1,9 +1,6 @@
 package burrows;
 
-import edu.princeton.cs.algs4.BinaryStdIn;
-import edu.princeton.cs.algs4.BinaryStdOut;
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.*;
 
 import java.util.Arrays;
 
@@ -49,13 +46,20 @@ public class BurrowsWheeler {
         char[] t = BinaryStdIn.readString().toCharArray();
         char[] t1 = Arrays.copyOf(t, t.length);
         Arrays.sort(t1);
-        int[] next = next(t);
 
+        Stopwatch timer1 = new Stopwatch();
+        int[] next = next(t);
+        double time1 = timer1.elapsedTime();
+        StdOut.printf("time-1=%f\n", time1);
+
+        Stopwatch timer2 = new Stopwatch();
         int temp = first;
         for (int i = 0; i < t.length; i++) {
             BinaryStdOut.write(t1[temp]);
             temp = next[temp];
         }
+        double time2 = timer2.elapsedTime();
+        StdOut.printf("time-2=%f\n", time2);
 
         BinaryStdOut.close();
     }
