@@ -43,10 +43,17 @@ public class CircularSuffixArray {
         for (int i = 0; i < N; i++) {
             index[i] = i;
         }
-        Arrays.sort(index, comparator);
+
     }
 
+    private void buildIndex2() {
 
+        index = new Integer[N];
+        for (int i = 0; i < N; i++) {
+            index[i] = i;
+        }
+        Arrays.sort(index, comparator);
+    }
 
     // length of chars
     public int length() {
